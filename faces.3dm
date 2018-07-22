@@ -1,0 +1,18 @@
+{1, 1, 0, 9, 9, 1, texture = "hardened_clay_stained_white"},
+{ 3, 4, 0, 4, 5, 1, texture = "lapis_block"},
+{ 6, 4, 0, 7, 5, 1, texture = "lapis_block"},
+{ 2, 4, 0, 3, 5, 1, texture = "wool_colored_white"},
+{ 7, 4, 0, 8, 5, 1, texture = "wool_colored_white"},
+-- { 1, 7, 1, 9, 9, 9, texture = "wool_colored_brown"},
+-- { 1, 6, 1, 2, 7, 9, texture = "wool_colored_brown"},
+{1, 7, 0, 9, 9, 1, texture = "wool_colored_brown"},
+{1, 6, 0, 2, 7, 1, texture = "wool_colored_brown"},
+{8, 6, 0, 9, 7, 1, texture = "wool_colored_brown"},
+
+{0, 1, 1, 1, 9, 9, texture = "hardened_clay_stained_white"},
+{0, 5, 1, 1, 9, 9, texture = "wool_colored_brown"},
+{0, 3, 4, 1, 9, 9, texture = "wool_colored_brown"},
+{0, 2, 5, 1, 9, 9, texture = "wool_colored_brown"},
+{0, 4, 1, 1, 5, 2, texture = "wool_colored_brown"},
+
+{1, 9, 1, 9, 10, 9, texture = "wool_colored_brown"},
