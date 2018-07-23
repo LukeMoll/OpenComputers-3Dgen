@@ -43,7 +43,7 @@ def face3dm(username):
     for y in range(im.size[1]):
         for x in range(im.size[0]):
             pix = im.getpixel((x,y))
-            model.addShape(Shape((x,8-(y+1),0), (x+1,8-y,1), "iron_block", rgbToHex(pix)))
+            model.addShape(Shape((x,8-(y+1),15), (x+1,8-y,16), "iron_block", rgbToHex(pix)))
     return str(model)
 
 def rgbToHex(c):
