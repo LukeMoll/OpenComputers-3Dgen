@@ -1,3 +1,5 @@
+import numpy as np
+
 class ThreeDM:
     def __init__(self, name, tooltip="", lightLevel=0, emitRedstone=False,
      buttonMode=False, playerCollidable=True, entityCollidable=True):
@@ -12,6 +14,12 @@ class ThreeDM:
 
     def addShape(self,shape):
         self.shapes.append(shape)
+
+    def transform(self, mat):
+        """
+        Applies Shape.transform(mat) to each of the shapes in this model
+        """
+        for shape in self.shapes: shape.transform(mat)
 
     def __str__(self):
         return """
@@ -32,11 +40,30 @@ class ThreeDM:
 
 class Shape:
     def __init__(self, startP, endP, texture, tint=None, onState=False):
-        self.startP = startP
-        self.endP = endP
+        """
+        Args:
+            startP: 3-tuple (x,y,z) of the starting corner
+            endP: as startP for the end corner
+            texture: which texture to use
+
+            tint: string in format 0xRRGGBB hex-encoded 00 to FF for R, G, B
+            onState: whether this is in the "on" state or not
+        """
+        self.start = np.array([startP + (1,)]).transpose()
+        self.end = np.array([endP + (1,)]).transpose()
         self.texture = texture
         if tint != None: self.tint = tint
         self.onState = onState
+    
+    def transform(self, mat):
+        """
+        Transforms this shape using homogenous coordinates.
+
+        Args:
+            mat: 4x4 numpy array representing a 4D linear transformation
+        """
+        self.start = mat @ self.start
+        self.end = mat @ self.end
 
     def __str__(self):
-        return "{{ {},{},{},{},{},{},texture=\"{}\"{}{}}},".format( self.startP[0], self.startP[1], self.startP[2], self.endP[0], self.endP[1], self.endP[2], self.texture, ",tint={}".format(self.tint) if self.tint != None else "", ",state={}".format(self.onState).lower() if self.onState else "")
+        return "{{ {},{},{},{},{},{},texture=\"{}\"{}{}}},".format( self.start[0][0], self.start[1][0], self.start[2][0], self.end[0][0], self.end[1][0], self.end[2][0], self.texture, ",tint={}".format(self.tint) if self.tint != None else "", ",state={}".format(self.onState).lower() if self.onState else "")
