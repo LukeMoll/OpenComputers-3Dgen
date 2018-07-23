@@ -6,6 +6,7 @@ from blocks import blocks
 solidblocks = [b for b in blocks if b[2] < 32 and b[1][3] == 255]
 
 from ThreeDM import ThreeDM, Shape
+from mojang import Mojang
 
 app = Flask(__name__)
 
@@ -58,4 +59,8 @@ def distance(c1, c2):
     return numpy.linalg.norm(a1 - a2)
 
 def fetch_skin(username):
-    return Image.open("head.png")
+    (uuid, uErr) = Mojang.getUUID(username)
+    if uErr != None or len(uuid) < 1:
+        return Image.open("4px_reference.png")
+    else:
+        return Mojang.getSkin(uuid[0]['id'])
